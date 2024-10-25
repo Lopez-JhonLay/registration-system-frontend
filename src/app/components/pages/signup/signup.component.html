@@ -1,0 +1,111 @@
+<div class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="card w-96 bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="text-center text-2xl font-bold">Registration</h2>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Username</span>
+          </label>
+          <input
+            formControlName="username"
+            type="text"
+            placeholder="Enter your username"
+            class="input input-bordered w-full"
+            required
+          />
+        </div>
+        @if (fc['username'].invalid && (fc['username'].dirty ||
+        fc['username'].touched)) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (fc['username'].errors?.['required']) {
+          <p>Username is required.</p>
+          } @if (fc['username'].errors?.['minlength']) {
+          <p>Username must be at least 3 characters.</p>
+          }
+        </div>
+        }
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Email</span>
+          </label>
+          <input
+            formControlName="email"
+            type="email"
+            placeholder="Enter your email"
+            class="input input-bordered w-full"
+            required
+          />
+        </div>
+        @if (fc['email'].invalid && (fc['email'].dirty || fc['email'].touched))
+        {
+        <div class="text-red-500 text-sm mt-1">
+          @if (fc['email'].errors?.['required']) {
+          <p>Email is required.</p>
+          } @if (fc['email'].errors?.['email']) { Please enter a valid email
+          address. }
+        </div>
+        }
+        <div class="form-control mt-4">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="Enter your password"
+            class="input input-bordered w-full"
+            required
+          />
+        </div>
+        @if (fc['password'].invalid && (fc['password'].dirty ||
+        fc['password'].touched)) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (fc['password'].errors?.['required']) {
+          <p>Password is required.</p>
+          } @if (fc['password'].errors?.['minlength']) {
+          <p>Password must be at least 6 characters.</p>
+          }
+        </div>
+        }
+        <div class="form-control mt-4">
+          <label class="label">
+            <span class="label-text">Confirm Password</span>
+          </label>
+          <input
+            formControlName="confirmPassword"
+            type="password"
+            placeholder="Enter your password"
+            class="input input-bordered w-full"
+            required
+          />
+        </div>
+        @if (fc['confirmPassword'].invalid && (fc['confirmPassword'].dirty ||
+        fc['confirmPassword'].touched)) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (fc['confirmPassword'].errors?.['required']) {
+          <p>Confirmation password is required.</p>
+          }
+        </div>
+        } @if (signupForm.errors?.['mismatch'] &&
+        signupForm.get('confirmPassword')?.touched) {
+        <div class="text-red-500 text-sm mt-1">
+          <p>Passwords do not match.</p>
+        </div>
+        }
+        <div class="form-control mt-6">
+          <button
+            class="btn btn-primary w-full"
+            [disabled]="signupForm.invalid"
+          >
+            Sign in
+          </button>
+        </div>
+      </form>
+      <p class="text-center mt-4 text-sm text-gray-600">
+        Already have an account?
+        <a routerLink="/login" class="text-primary">Login</a>
+      </p>
+    </div>
+  </div>
+</div>
